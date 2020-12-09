@@ -52,4 +52,10 @@ public class HomeController { //controller 类可省略访问路径，直接定�
         model.addAttribute("discussPosts",discussPosts);
         return "/index";
     }
+
+    @RequestMapping(path = "index")
+    public String toindex(){
+
+        return "/index";
+    }
 }
