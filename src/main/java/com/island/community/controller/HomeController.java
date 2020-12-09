@@ -53,9 +53,9 @@ public class HomeController { //controller 类可省略访问路径，直接定�
         return "/index";
     }
 
-    @RequestMapping(path = "index")
+    @RequestMapping(path = "/")
     public String toindex(){
 
-        return "/index";
+        return "/mail/demo";
     }
 }
