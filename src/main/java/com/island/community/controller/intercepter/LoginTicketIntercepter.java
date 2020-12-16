@@ -30,6 +30,7 @@ public class LoginTicketIntercepter implements HandlerInterceptor {
         String ticket = CookieUtil.getValue(request,"ticket");//cookie的名字是ticket 其存放的value是目前用户的凭证
 
         if(ticket!=null){
+            ticket=ticket.replaceAll("/"," ");
             LoginTicket loginTicket = userService.findLoginTicket(ticket);
             //检查片凭证是否有效
             if(loginTicket!=null && loginTicket.getStatus()==0 && loginTicket.getExpired().after(new Date())){
@@ -53,6 +54,7 @@ public class LoginTicketIntercepter implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("do");
         hostHolder.clear();
     }
 }
