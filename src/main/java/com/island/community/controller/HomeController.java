@@ -31,31 +31,32 @@ public class HomeController { //controller 类可省略访问路径，直接定�
         // 方法调用钱,SpringMVC会自动实例化Model和Page,并将Page注入Model.
         // 所以,在thymeleaf中可以直接访问Page对象中的数据.
         page.setRows(discussPostService.findDiscussPostRows(0));
+        System.out.println(page.getRows());
         page.setPath("/index");
 
 
-        List<DiscussPost> list=discussPostService.findDiscussPost(0,page.getOffset(),page.getLimit());
+        List<DiscussPost> list=discussPostService.findDiscussPosts(0,page.getOffset(),page.getLimit());
         List<Map<String,Object>> discussPosts=new ArrayList<>();
         if(list!=null)
         {
             for(DiscussPost post:list)
                 {
-                Map<String,Object> map=new HashMap<>();
-                map.put("post",post);
+                    Map<String,Object> map=new HashMap<>();
 
-                User user=userService.findById(post.getUserId());
-                map.put("user",user);
-                discussPosts.add(map);
+                    User user=userService.findById(post.getUserId());
+                    if(user==null)
+                        continue;
+                    map.put("user",user);
+                    map.put("post",post);
+                    discussPosts.add(map);
             }
         }
-
         model.addAttribute("discussPosts",discussPosts);
         return "/index";
     }
 
     @RequestMapping(path = "/")
     public String toindex(){
-
         return "/mail/demo";
     }
 }

@@ -3,7 +3,9 @@ package com.island.community.test;
 import com.island.community.CommunityApplication;
 import com.island.community.dao.DiscussPostMapper;
 import com.island.community.entity.DiscussPost;
+import com.island.community.entity.User;
 import com.island.community.service.DiscussPostService;
+import com.island.community.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -24,14 +26,24 @@ public class test {
     @Autowired
     private DiscussPostService discussPostService;
 
+    @Autowired
+    private UserService userService;
+
     @Test
     public void testService()
      {
-         List<DiscussPost>list= discussPostService.findDiscussPost(0,0,10);
+         List<DiscussPost>list= discussPostService.findDiscussPosts(0,0,10);
          for(DiscussPost post:list){
              System.out.println(post);
          }
      }
+
+     @Test
+    public void testUser(){
+         User user=userService.findById(145);
+         System.out.println(user);
+     }
+
 
 
 //    @Test

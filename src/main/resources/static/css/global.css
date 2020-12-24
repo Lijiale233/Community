@@ -20,6 +20,11 @@ body {
 	padding: 0;
 }
 
+.keep_dis {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
 header .navbar-brand {
 	background: url('../img/logo.jpeg') no-repeat;
 	background-size: 42px 42px;
@@ -42,7 +47,7 @@ header .badge {
 footer {
 	padding: 20px 0;
 	font-size: 12px;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	width: 100%;
 }

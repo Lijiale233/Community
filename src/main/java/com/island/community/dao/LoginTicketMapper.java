@@ -2,9 +2,6 @@ package com.island.community.dao;
 
 import com.island.community.entity.LoginTicket;
 import org.apache.ibatis.annotations.*;
-import sun.rmi.runtime.Log;
-
-import java.util.List;
 
 //本方法使用注解方式进行mapper语句的嵌套
 @Mapper

@@ -17,4 +17,11 @@ public interface CommunityConstant {
     //记住状态下超时时间
     int REMEMBER_EXPIRED_SECONDS=3600 * 24 *100;
 
+    //评论对象为帖子
+    int ENTITY_TYPE_POST=1;
+
+    //评论类型为评论
+    int ENTITY_TYPE_COMMENT=2;
+
+
 }

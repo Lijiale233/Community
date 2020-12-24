@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.island.community.dao.DiscussPostMapper">
-<!--    此处要精确到类名-->
+
     <sql id="selectFields">
         id, user_id, title, content, type, status, create_time, comment_count, score
     </sql>
 
     <sql id="insertFields">
-         user_id, title, content, type, status, create_time, comment_count, score
+        user_id, title, content, type, status, create_time, comment_count, score
     </sql>
 
     <select id="selectDiscussPosts" resultType="DiscussPost">
@@ -32,8 +32,19 @@
         </if>
     </select>
 
-    <insert id="insertDiscussPost" parameterType="discussPost"> //定义了parameterType后 下面的变量会自动标示为该类的下级属性
+    <insert id="insertDiscussPost" parameterType="DiscussPost">
         insert into discuss_post(<include refid="insertFields"></include>)
         values(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score})
     </insert>
+
+    <select id="selectDiscussPostById" resultType="DiscussPost">
+        select <include refid="selectFields"></include>
+        from discuss_post
+        where id = #{id}
+    </select>
+
+    <update id="updateCommentCount">
+        update discuss_post set comment_count = #{commentCount} where id = #{id}
+    </update>
+
 </mapper>
