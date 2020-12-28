@@ -1,18 +1,18 @@
 package com.island.community.controller;
 
 import com.google.code.kaptcha.Producer;
+import com.island.community.entity.Adminstrater;
 import com.island.community.entity.User;
+import com.island.community.service.AdminstraterService;
 import com.island.community.service.UserService;
 import com.island.community.util.CommunityConstant;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
@@ -32,10 +32,14 @@ public class LoginController implements CommunityConstant {
     @Autowired
     private Producer kaptchaProducer;
 
+    @Autowired
+    private AdminstraterService adminstraterService;
+
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    @RequestMapping(path = "/register",method = RequestMethod.POST)
+
+    @RequestMapping(path = "/registerAsUser",method = RequestMethod.POST)
     public String register(Model model, User user){
         Map<String,Object> map = userService.register(user);
         if(map==null||map.isEmpty())
@@ -45,6 +49,26 @@ public class LoginController implements CommunityConstant {
             return "/site/operate-result";
         }
         else{
+            model.addAttribute("usernameMsg",map.get("usernameMsg"));
+            model.addAttribute("passwordMsg",map.get("passwordMsg"));
+            model.addAttribute("emailMsg",map.get("emailMsg"));
+            return "/site/register";
+        }
+    }
+
+    @RequestMapping(path = "/registerAsAdminstrater",method = RequestMethod.POST)
+    public String registerAsAdminstrater(Model model, Adminstrater adminstrater, @RequestParam("adminstraterCode") String adminstraterCode){
+        System.out.println("code is " +adminstraterCode);
+        System.out.println("get username "+adminstrater.getUsername());
+        Map<String,Object> map = adminstraterService.registerAsAdminstrater(adminstrater,adminstraterCode);
+        if(map==null||map.isEmpty())
+        {
+            model.addAttribute("msg","管理员注册成功，将直接跳转至主页面");
+            model.addAttribute("target","/index");
+            return "/site/operate-result";
+        }
+        else
+        {
             model.addAttribute("usernameMsg",map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
             model.addAttribute("emailMsg",map.get("emailMsg"));

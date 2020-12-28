@@ -55,7 +55,6 @@ public class LoginTicketIntercepter implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("do");
         hostHolder.clear();
     }
 }

@@ -23,5 +23,8 @@ public interface CommunityConstant {
     //评论类型为评论
     int ENTITY_TYPE_COMMENT=2;
 
+    //管理员邀请码
+    String ADMINSTRATER_CODE="islandisthebest";
+
 
 }

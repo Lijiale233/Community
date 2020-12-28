@@ -1,7 +1,9 @@
 package com.island.community.test;
 
 import com.island.community.CommunityApplication;
+import com.island.community.dao.AdminstraterMapper;
 import com.island.community.dao.DiscussPostMapper;
+import com.island.community.entity.Adminstrater;
 import com.island.community.entity.DiscussPost;
 import com.island.community.entity.User;
 import com.island.community.service.DiscussPostService;
@@ -29,6 +31,9 @@ public class test {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AdminstraterMapper adminstraterMapper;
+
     @Test
     public void testService()
      {
@@ -43,6 +48,21 @@ public class test {
          User user=userService.findById(145);
          System.out.println(user);
      }
+
+     @Test
+    public void testAdminstraterMappeer(){
+         Adminstrater adminstrater=new Adminstrater();
+         adminstrater.setHeaderUrl("123");
+         adminstrater.setUsername("lijiale");
+         adminstrater.setPassword("123");
+         adminstrater.setSalt("123123123");
+
+         adminstraterMapper.insertAdminstrater(adminstrater);
+         System.out.println(adminstraterMapper.selectAll());
+     }
+
+
+
 
 
 
