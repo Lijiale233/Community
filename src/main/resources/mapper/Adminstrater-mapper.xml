@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.island.community.dao.AdminstraterMapper">
+
+    <sql id="insertFields">
+        username, password, salt, headerUrl
+    </sql>
+
+    <sql id="selectFields">
+        id, username, password, headerUrl
+    </sql>
+
+    <select id="selectAll" resultType="Adminstrater">
+        select <include refid="selectFields"></include>
+        from adminstrater
+    </select>
+
+    <insert id="insertAdminstrater" parameterType="Adminstrater" keyProperty="id">
+        insert into adminstrater (<include refid="insertFields"></include>)
+        values(#{username}, #{password}, #{salt}, #{headerUrl})
+    </insert>
+
+    <update id="updatePassword">
+        update adminstrater set password = #{password} where id = #{id}
+    </update>
+
+    <select id="selectByName" resultType="Adminstrater">
+        select <include refid="selectFields"></include>
+        from adminstrater
+        where username = #{username}
+    </select>
+
+</mapper>

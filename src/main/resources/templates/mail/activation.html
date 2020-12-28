@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+    <title>岛民社区-激活账号</title>
+</head>
+<body>
+	<div>
+		<p>
+			<b th:text="${email}">xxx@xxx.com</b>, 您好!
+		</p>
+		<p>
+			您正在注册岛民社区 这是一封激活邮件, 请点击
+<!--			userService中指定的url路径-->
+			<a th:href="${url}">此链接</a>,
+			<p th:text="${url}">url</p>
+
+			激活您的社区账号!
+		</p>
+	</div>
+</body>
+</html>
